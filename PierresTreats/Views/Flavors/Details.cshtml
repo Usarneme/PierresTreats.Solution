@@ -3,24 +3,28 @@
 <div class="container">
   <h1>Flavor Details - @Model.Name</h1>
   <p>@Model.Name</p>
+  @if (Model.FlavorTreats.Count == 0)
+  {
+    <p>No Treats are associated with this Flavor.</p>
+  }
+  else
+  {
+    <h3>Treats associated with this Flavor:</h3>
+    <ul>
+      @foreach (var join in Model.FlavorTreats)
+      {
+        <li>
+          <p>@join.Treat.Name</p>
+          @if (User.Identity.IsAuthenticated)
+          {
+            <button class="btn btn-block btn-danger delete-association" id="@join.FlavorTreatId">Remove Treat</button>
+          }
+        </li>
+      }
+    </ul>
+  }
   @if (User.Identity.IsAuthenticated)
   {
-    @if (Model.FlavorTreats.Count == 0)
-    {
-      <p>No Treats are associated with this Flavor.</p>
-    }
-    else
-    {
-      <h3>Treats associated with this Flavor:</h3>
-      <ul>
-        @foreach (var join in Model.FlavorTreats)
-        {
-          <li>
-            <p>@join.Treat.Name</p>
-          </li>
-        }
-      </ul>
-    }
     <a href="/flavors/edit/@Model.FlavorId" class="btn btn-block btn-primary">Edit Flavor</a>
   }
 </div>

@@ -26,5 +26,14 @@ namespace PierresTreats.Controllers
       ViewBag.flavors = _db.Flavors.ToList();
       return View();
     }
+
+    [HttpPost("/delete_association/{joinId}")]
+    public ActionResult DeleteAssociatedFlavor(string joinId)
+    {
+      FlavorTreat ft = _db.FlavorTreats.FirstOrDefault(ft => ft.FlavorTreatId == joinId);
+      _db.FlavorTreats.Remove(ft);
+      _db.SaveChanges();
+      return Content("ok");
+    }
   }
 }
