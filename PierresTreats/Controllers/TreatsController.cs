@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -48,6 +49,21 @@ namespace PierresTreats.Controllers
     {
       Treat t = _db.Treats.FirstOrDefault(t => t.TreatId == treatId);
       return View(t);
+    }
+
+    [HttpGet("/treats/edit/{treatId}")]
+    public ActionResult Edit(string treatId)
+    {
+      Treat t = _db.Treats.FirstOrDefault(t => t.TreatId == treatId);
+      return View(t);
+    }
+
+    [HttpPost("/treats/edit/{treatId}")]
+    public ActionResult Edit(Treat t)
+    {
+      _db.Entry(t).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }

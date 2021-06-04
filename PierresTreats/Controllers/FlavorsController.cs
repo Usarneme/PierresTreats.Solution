@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -49,6 +50,21 @@ namespace PierresTreats.Controllers
     {
       Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
       return View(f);
+    }
+
+    [HttpGet("/flavors/edit/{flavorId}")]
+    public ActionResult Edit(string flavorId)
+    {
+      Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
+      return View(f);
+    }
+
+    [HttpPost("/flavors/edit/{flavorId}")]
+    public ActionResult Edit(Flavor f)
+    {
+      _db.Entry(f).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
   }
