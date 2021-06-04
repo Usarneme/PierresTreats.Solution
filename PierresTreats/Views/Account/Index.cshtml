@@ -1,0 +1,19 @@
+@using System.Security.Claims;
+
+<div class="container">
+  <h1>Account Page</h1>
+  @if (User.Identity.IsAuthenticated)
+  {
+    <h2>Welcome Home, @User.Identity.Name</h2>
+
+    @using (Html.BeginForm("LogOff", "Account"))
+    {
+      <input type="submit" class="btn btn-primary btn-block" value="Log Out" />
+    }
+  }
+  else
+  {
+    <p>Please @Html.ActionLink("register", "Register", "Account") or @Html.ActionLink("login", "Login", "Account") to
+      view account details.</p>
+  }
+</div>

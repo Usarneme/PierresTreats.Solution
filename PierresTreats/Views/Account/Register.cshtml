@@ -1,0 +1,25 @@
+@using PierresTreats.ViewModels;
+@model RegisterViewModel;
+
+<div class="container">
+  <h1>Register New User</h1>
+  @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+  {
+    <div class="form-group">
+      @Html.LabelFor(u => u.Email)
+      @Html.TextBoxFor(u => u.Email, null, new { @required="required", @class="form-control", type="email" })
+    </div>
+
+    <div class="form-group">
+      @Html.LabelFor(u => u.Password)
+      @Html.TextBoxFor(u => u.Password, null, new { @required="required", @class="form-control", type="password" })
+    </div>
+
+    <div class="form-group">
+      @Html.LabelFor(u => u.ConfirmPassword)
+      @Html.TextBoxFor(u => u.ConfirmPassword, null, new { @required="required", @class="form-control", type="password" })
+    </div>
+
+    <input type="submit" class="btn btn-block btn-primary" value="Register Account" />
+  }
+</div>
