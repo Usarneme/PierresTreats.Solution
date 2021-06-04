@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Treats</h1>
+  @if (ViewBag.treats.Count == 0)
+  {
+    <p>No Treats Available.</p>
+    @Html.ActionLink("Add A Treat", "Create", "Treats", null, new { @class="btn btn-block btn-primary" })
+  }
+  else
+  {
+    <ul>
+      @foreach (Treat t in ViewBag.treats)
+      {
+        <li>@t.Name</li>
+      }
+    </ul>
+  }
+</div>

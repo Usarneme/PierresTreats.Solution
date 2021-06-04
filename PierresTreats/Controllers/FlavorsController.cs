@@ -15,16 +15,20 @@ namespace PierresTreats.Controllers
   {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    public FlavorsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+    private readonly PierresTreatsContext _db;
+
+    public FlavorsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, PierresTreatsContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
+      _db = db;
     }
 
-    [HttpGet("/flavor")]
+    [HttpGet("/flavors")]
     public ActionResult Index()
     {
-        return View();
+      ViewBag.flavors = _db.Flavors.ToList();
+      return View();
     }
 
   }

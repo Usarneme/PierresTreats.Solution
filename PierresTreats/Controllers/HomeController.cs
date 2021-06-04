@@ -20,12 +20,11 @@ namespace PierresTreats.Controllers
       _logger = logger;
     }
 
-    public IActionResult Index()
+    public ActionResult Index()
     {
       ViewBag.treats = _db.Treats.ToList();
       ViewBag.flavors = _db.Flavors.ToList();
       return View();
     }
-
   }
 }
