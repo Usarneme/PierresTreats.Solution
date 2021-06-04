@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace PierresTreats.Controllers
     [HttpGet("/flavors/details/{flavorId}")]
     public ActionResult Details(string flavorId)
     {
-      Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
+      Flavor f = _db.Flavors.Include(f => f.FlavorTreats).ThenInclude(join => join.Treat).FirstOrDefault(f => f.FlavorId == flavorId);
       return View(f);
     }
 
@@ -56,12 +57,19 @@ namespace PierresTreats.Controllers
     public ActionResult Edit(string flavorId)
     {
       Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
       return View(f);
     }
 
     [HttpPost("/flavors/edit/{flavorId}")]
-    public ActionResult Edit(Flavor f)
+    public ActionResult Edit(Flavor f, string TreatId)
     {
+      FlavorTreat ft = _db.FlavorTreats.FirstOrDefault(ft => ft.TreatId == TreatId && ft.FlavorId == f.FlavorId);
+      // Only add this FlavorTreat if it does not already exist
+      if (TreatId != null && ft == null)
+      {
+        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = f.FlavorId });
+      }
       _db.Entry(f).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
