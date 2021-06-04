@@ -6,25 +6,7 @@
   <h1 class="display-4">Welcome to Pierre's Treats!</h1>
   <div class="container row">
     <div class="col-sm-6">
-      <h3>Treats</h3>
-      @if (ViewBag.treats.Count == 0)
-      {
-        <p>No Treats Available.</p>
-      }
-      else
-      {
-        <ul>
-          @foreach (Treat t in ViewBag.treats)
-          {
-            <li>@t.Name</li>
-          }
-        </ul>
-      }
-      @Html.ActionLink("Add A Treat", "Create", "Treats", null, new { @class="btn btn-block btn-primary" })
-    </div>
-
-    <div class="col-sm-6">
-      <h3>Flavors</h3>
+      <h3>@Html.ActionLink("Flavors", "Index", "Flavors")</h3>
       @if (ViewBag.flavors.Count == 0)
       {
         <p>No Flavors Available.</p>
@@ -34,11 +16,39 @@
         <ul>
           @foreach (Flavor f in ViewBag.flavors)
           {
-            <li>@f.Name</li>
+            <li>
+              <a href="/flavors/details/@f.FlavorId" class="btn btn-block btn-primary">@f.Name</a>
+            </li>
           }
         </ul>
       }
-      @Html.ActionLink("Add A Flavor", "Create", "Flavors", null, new { @class="btn btn-block btn-primary" })
+      @if (User.Identity.IsAuthenticated)
+      {
+        @Html.ActionLink("Add A Flavor", "Create", "Flavors", null, new { @class="btn btn-block btn-primary" })
+      }
+    </div>
+
+    <div class="col-sm-6">
+      <h3>@Html.ActionLink("Treats", "Index", "Treats")</h3>
+      @if (ViewBag.treats.Count == 0)
+      {
+        <p>No Treats Available.</p>
+      }
+      else
+      {
+        <ul>
+          @foreach (Treat t in ViewBag.treats)
+          {
+            <li>
+              <a href="/treats/details/@t.TreatId" class="btn btn-block btn-primary">@t.Name</a>
+            </li>
+          }
+        </ul>
+      }
+      @if (User.Identity.IsAuthenticated)
+      {
+        @Html.ActionLink("Add A Treat", "Create", "Treats", null, new { @class="btn btn-block btn-primary" })
+      }
     </div>
   </div>
 </div>

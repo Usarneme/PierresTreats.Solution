@@ -3,4 +3,8 @@
 <div class="container">
   <h1>Flavor Details - @Model.Name</h1>
   <p>@Model.Name</p>
+  @if (User.Identity.IsAuthenticated)
+  {
+    <a href="/flavors/edit/@Model.FlavorId" class="btn btn-block btn-primary">Edit Flavor</a>
+  }
 </div>

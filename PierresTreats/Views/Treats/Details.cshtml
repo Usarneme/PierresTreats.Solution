@@ -3,4 +3,8 @@
 <div class="container">
   <h1>Treat Details - @Model.Name</h1>
   <p>@Model.Name</p>
+  @if (User.Identity.IsAuthenticated)
+  {
+    <a href="/treats/edit/@Model.TreatId" class="btn btn-block btn-primary">Edit Treat</a>
+  }
 </div>
