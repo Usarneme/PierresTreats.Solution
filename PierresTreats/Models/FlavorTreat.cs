@@ -1,4 +1,4 @@
-using System; 
+using System;
 
 namespace PierresTreats.Models
 {
@@ -9,7 +9,9 @@ namespace PierresTreats.Models
       FlavorTreatId = Guid.NewGuid().ToString();
     }
     public string FlavorTreatId { get; set; }
+    public string FlavorId { get; set; }
     public virtual Flavor Flavor { get; set; }
+    public string TreatId { get; set; }
     public virtual Treat Treat { get; set; }
   }
 }
