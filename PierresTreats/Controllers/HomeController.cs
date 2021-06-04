@@ -9,19 +9,23 @@ using PierresTreats.Models;
 
 namespace PierresTreats.Controllers
 {
-    public class HomeController : Controller
+  public class HomeController : Controller
+  {
+    private readonly ILogger<HomeController> _logger;
+    private readonly PierresTreatsContext _db;
+
+    public HomeController(PierresTreatsContext db, ILogger<HomeController> logger)
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+      _db = db;
+      _logger = logger;
     }
+
+    public IActionResult Index()
+    {
+      ViewBag.treats = _db.Treats.ToList();
+      ViewBag.flavors = _db.Flavors.ToList();
+      return View();
+    }
+
+  }
 }
