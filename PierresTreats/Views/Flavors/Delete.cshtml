@@ -1,0 +1,9 @@
+@model PierresTreats.Models.Flavor;
+
+<div class="container">
+  <h1>Delete Flavor - @Model.Name</h1>
+  @using (Html.BeginForm("DeleteConfirmed", "Flavors"))
+  {
+    <input type="submit" value="Permanently Delete Flavor" class="btn btn-block btn-danger" />
+  }
+</div>

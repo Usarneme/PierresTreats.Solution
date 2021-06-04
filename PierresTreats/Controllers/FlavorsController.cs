@@ -67,5 +67,11 @@ namespace PierresTreats.Controllers
       return RedirectToAction("Index");
     }
 
+    [HttpGet("/flavors/delete/{flavorId}")]
+    public ActionResult Delete(string flavorId)
+    {
+      Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
+      return View(f);
+    }
   }
 }
