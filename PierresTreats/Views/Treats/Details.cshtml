@@ -5,6 +5,22 @@
   <p>@Model.Name</p>
   @if (User.Identity.IsAuthenticated)
   {
+    @if (Model.FlavorTreats.Count == 0)
+    {
+      <p>No Flavors are associated with this Treat.</p>
+    }
+    else
+    {
+      <h3>Flavors associated with this Treat:</h3>
+      <ul>
+        @foreach (var join in Model.FlavorTreats)
+        {
+          <li>
+            <p>@join.Flavor.Name</p>
+          </li>
+        }
+      </ul>
+    }
     <a href="/treats/edit/@Model.TreatId" class="btn btn-block btn-primary">Edit Treat</a>
   }
 </div>

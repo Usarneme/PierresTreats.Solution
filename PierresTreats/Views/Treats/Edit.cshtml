@@ -10,6 +10,11 @@
     value=@Model.Name })
     </div>
 
+    <div class="form-group">
+      @Html.Label("Associated Flavors")
+      @Html.DropDownList("FlavorId")
+    </div>
+
     <input type="submit" class="btn btn-block btn-primary" value="Save Changes" />
   }
   <a href="/treats/delete/@Model.TreatId" class="btn btn-block btn-primary">Delete Treat</a>
