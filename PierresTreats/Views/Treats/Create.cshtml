@@ -1,0 +1,14 @@
+@model PierresTreats.Models.Treat;
+
+<div class="container">
+  <h1>Add New Treat</h1>
+  @using (Html.BeginForm("Create", "Treats", FormMethod.Post))
+  {
+    <div class="form-group">
+      @Html.LabelFor(u => u.Name)
+      @Html.TextBoxFor(u => u.Name, null, new { @required="required", @class="form-control", type="text" })
+    </div>
+
+    <input type="submit" class="btn btn-block btn-primary" value="Add Treat" />
+  }
+</div>

@@ -1,0 +1,14 @@
+@model PierresTreats.Models.Flavor;
+
+<div class="container">
+  <h1>Add New Flavor</h1>
+  @using (Html.BeginForm("Create", "Flavors", FormMethod.Post))
+  {
+    <div class="form-group">
+      @Html.LabelFor(u => u.Name)
+      @Html.TextBoxFor(u => u.Name, null, new { @required="required", @class="form-control", type="text" })
+    </div>
+
+    <input type="submit" class="btn btn-block btn-primary" value="Add Flavor" />
+  }
+</div>

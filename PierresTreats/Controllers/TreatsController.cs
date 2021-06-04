@@ -11,6 +11,7 @@ using PierresTreats.Models;
 
 namespace PierresTreats.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -23,12 +24,15 @@ namespace PierresTreats.Controllers
       _db = db;
     }
 
+    [AllowAnonymous]
     [HttpGet("/treats")]
     public ActionResult Index()
     {
       ViewBag.treats = _db.Treats.ToList();
       return View();
     }
+
+    [HttpGet("/treats/create")] public ActionResult Create() => View();
 
   }
 }
