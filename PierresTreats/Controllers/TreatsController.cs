@@ -72,5 +72,14 @@ namespace PierresTreats.Controllers
       Treat t = _db.Treats.FirstOrDefault(t => t.TreatId == treatId);
       return View(t);
     }
+
+    [HttpPost("/treats/DeleteConfirmed")]
+    public ActionResult DeleteConfirmed(string treatId)
+    {
+      Treat t = _db.Treats.FirstOrDefault(t => t.TreatId == treatId);
+      _db.Treats.Remove(t);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }

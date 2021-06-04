@@ -4,6 +4,7 @@
   <h1>Delete Treat - @Model.Name</h1>
   @using (Html.BeginForm("DeleteConfirmed", "Treats"))
   {
+    @Html.Hidden("treatId", @Model.TreatId)
     <input type="submit" value="Permanently Delete Treat" class="btn btn-block btn-danger" />
   }
 </div>

@@ -73,5 +73,14 @@ namespace PierresTreats.Controllers
       Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
       return View(f);
     }
+
+    [HttpPost("/flavors/DeleteConfirmed")]
+    public ActionResult DeleteConfirmed(string flavorId)
+    {
+      Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
+      _db.Flavors.Remove(f);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
