@@ -34,5 +34,12 @@ namespace PierresTreats.Controllers
 
     [HttpGet("/treats/create")] public ActionResult Create() => View();
 
+    [HttpPost("/treats/create")]
+    public ActionResult Create(Treat t)
+    {
+      _db.Treats.Add(t);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }

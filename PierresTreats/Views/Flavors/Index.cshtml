@@ -3,7 +3,6 @@
   @if (ViewBag.flavors.Count == 0)
   {
     <p>No Flavors Available.</p>
-    @Html.ActionLink("Add A Flavor", "Create", "Flavors", null, new { @class="btn btn-block btn-primary" })
   }
   else
   {
@@ -14,4 +13,5 @@
       }
     </ul>
   }
+  @Html.ActionLink("Add A Flavor", "Create", "Flavors", null, new { @class="btn btn-block btn-primary" })
 </div>
