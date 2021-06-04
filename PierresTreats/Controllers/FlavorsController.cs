@@ -43,5 +43,13 @@ namespace PierresTreats.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
+    [HttpGet("/flavors/details/{flavorId}")]
+    public ActionResult Details(string flavorId)
+    {
+      Flavor f = _db.Flavors.FirstOrDefault(f => f.FlavorId == flavorId);
+      return View(f);
+    }
+
   }
 }

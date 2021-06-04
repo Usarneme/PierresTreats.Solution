@@ -41,5 +41,13 @@ namespace PierresTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [AllowAnonymous]
+    [HttpGet("/treats/details/{treatId}")]
+    public ActionResult Details(string treatId)
+    {
+      Treat t = _db.Treats.FirstOrDefault(t => t.TreatId == treatId);
+      return View(t);
+    }
   }
 }

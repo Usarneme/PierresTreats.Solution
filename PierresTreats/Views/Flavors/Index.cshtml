@@ -9,7 +9,10 @@
     <ul>
       @foreach (Flavor f in ViewBag.flavors)
       {
-        <li>@f.Name</li>
+        <li>
+          <p>@f.Name</p>
+          <a href="/flavors/details/@f.FlavorId" class="btn btn-block btn-primary">View Details</a>
+        </li>
       }
     </ul>
   }

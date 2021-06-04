@@ -9,7 +9,10 @@
     <ul>
       @foreach (Treat t in ViewBag.treats)
       {
-        <li>@t.Name</li>
+        <li>
+          <p>@t.Name</p>
+          <a href="/treats/details/@t.TreatId" class="btn btn-block btn-primary">View Details</a>
+        </li>
       }
     </ul>
   }
